@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Panel - Course Scheduler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">← Back to Home</a>
+    </nav>
+    
+    <div class="dashboard">
+        <h2>👨🎓 Student Dashboard</h2>
+        
+        <div class="section">
+            <h3>Available Courses</h3>
+            <input type="text" id="searchCourse" placeholder="🔍 Search courses..." onkeyup="filterCourses()">
+            <ul id="availableCourses" class="course-list"></ul>
+        </div>
+
+        <div class="section">
+            <h3>My Schedule</h3>
+            <div class="stats">
+                <span>Enrolled Courses: <strong id="enrolledCount">0</strong></span>
+            </div>
+            <ul id="mySchedule" class="schedule-list"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
