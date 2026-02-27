@@ -9,26 +9,88 @@
 <body>
     <nav>
         <a href="index.html">← Back to Home</a>
+        <span id="welcomeUser" style="color: white; margin-left: 20px;"></span>
+        <button onclick="logout()" class="btn-danger" style="float: right;">Logout</button>
     </nav>
     
     <div class="dashboard">
         <h2>👨🎓 Student Dashboard</h2>
         
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="enrolledCount">0</h3>
+                <p>Enrolled Courses</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="totalCredits">0</h3>
+                <p>Total Credits</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="availableCount">0</h3>
+                <p>Available Courses</p>
+            </div>
+        </div>
+
+        <!-- Weekly Timetable -->
         <div class="section">
-            <h3>Available Courses</h3>
-            <input type="text" id="searchCourse" placeholder="🔍 Search courses..." onkeyup="filterCourses()">
+            <h3>📅 Weekly Timetable</h3>
+            <div class="timetable-container">
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timetableBody">
+                    </tbody>
+                </table>
+            </div>
+            <button onclick="exportSchedule()" class="btn-secondary">📥 Export Schedule</button>
+        </div>
+
+        <!-- Available Courses -->
+        <div class="section">
+            <h3>📚 Available Courses</h3>
+            <div class="filter-bar">
+                <input type="text" id="searchCourse" placeholder="🔍 Search courses..." onkeyup="filterCourses()">
+                <select id="filterDay" onchange="filterCourses()">
+                    <option value="">All Days</option>
+                    <option value="Mon">Monday</option>
+                    <option value="Tue">Tuesday</option>
+                    <option value="Wed">Wednesday</option>
+                    <option value="Thu">Thursday</option>
+                    <option value="Fri">Friday</option>
+                </select>
+                <select id="sortBy" onchange="sortCourses()">
+                    <option value="name">Sort by Name</option>
+                    <option value="code">Sort by Code</option>
+                    <option value="time">Sort by Time</option>
+                    <option value="capacity">Sort by Availability</option>
+                </select>
+            </div>
             <ul id="availableCourses" class="course-list"></ul>
         </div>
 
+        <!-- My Schedule -->
         <div class="section">
-            <h3>My Schedule</h3>
-            <div class="stats">
-                <span>Enrolled Courses: <strong id="enrolledCount">0</strong></span>
-            </div>
+            <h3>🎯 My Enrolled Courses</h3>
             <ul id="mySchedule" class="schedule-list"></ul>
+        </div>
+
+        <!-- Course Recommendations -->
+        <div class="section">
+            <h3>💡 Recommended Courses</h3>
+            <p class="info-text">Based on your schedule availability</p>
+            <ul id="recommendations" class="course-list"></ul>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="student-script.js"></script>
 </body>
 </html>

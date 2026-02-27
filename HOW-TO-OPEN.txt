@@ -1,0 +1,106 @@
+# 🚀 SIMPLE GUIDE - How to Open Your Website
+
+## STEP 1: Install Node.js
+
+1. Go to: https://nodejs.org/
+2. Click the big green button "Download Node.js"
+3. Run the downloaded file
+4. Click "Next" → "Next" → "Install"
+5. Wait for installation to complete
+6. Click "Finish"
+
+## STEP 2: Open Command Prompt
+
+### Method A (Easy):
+1. Press Windows Key + R
+2. Type: cmd
+3. Press Enter
+
+### Method B (Easier):
+1. Click Windows Start button
+2. Type: cmd
+3. Click "Command Prompt"
+
+## STEP 3: Go to Your Project Folder
+
+In the black Command Prompt window, type this EXACTLY:
+
+```
+cd C:\Users\DELL\course scheduler
+```
+
+Then press Enter
+
+## STEP 4: Install Required Files
+
+Type this EXACTLY:
+
+```
+npm install
+```
+
+Then press Enter
+
+Wait 1-2 minutes for it to finish.
+
+## STEP 5: Start the Website
+
+Type this EXACTLY:
+
+```
+npm start
+```
+
+Then press Enter
+
+You should see: "Server running on http://localhost:3000"
+
+## STEP 6: Open in Browser
+
+1. Open Chrome (or any browser)
+2. In the address bar, type: localhost:3000
+3. Press Enter
+
+✅ YOUR WEBSITE IS NOW OPEN!
+
+## Login Details:
+
+**Admin Login:**
+- Username: admin
+- Password: admin123
+
+**Student Login:**
+- Click "Register" tab
+- Create your own account
+
+---
+
+## If Something Goes Wrong:
+
+### Error: "npm is not recognized"
+- Node.js is not installed properly
+- Go back to Step 1
+
+### Error: "Cannot find module"
+- Go back to Step 4 and run: npm install
+
+### Port already in use:
+- Close Command Prompt
+- Open new Command Prompt
+- Start from Step 3
+
+---
+
+## Quick Commands Summary:
+
+```
+cd C:\Users\DELL\course scheduler
+npm install
+npm start
+```
+
+Then open browser: localhost:3000
+
+---
+
+Need help? The Command Prompt window must stay open while using the website!

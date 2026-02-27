@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Course Scheduler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero">
+        <h1>🔐 Login</h1>
+        <p>Access your course scheduler account</p>
+    </div>
+    
+    <div class="container">
+        <div class="card" style="max-width: 400px; margin: 0 auto;">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('login')">Login</button>
+                <button class="tab-btn" onclick="showTab('register')">Register</button>
+            </div>
+            
+            <div id="loginForm" class="tab-content active">
+                <h2>Login</h2>
+                <form onsubmit="handleLogin(event)">
+                    <input type="text" id="loginUsername" placeholder="Username" required>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <select id="loginRole" required>
+                        <option value="student">Student</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+                <p class="hint">Admin: username: admin, password: admin123</p>
+            </div>
+            
+            <div id="registerForm" class="tab-content">
+                <h2>Register (Student)</h2>
+                <form onsubmit="handleRegister(event)">
+                    <input type="text" id="regUsername" placeholder="Username" required>
+                    <input type="password" id="regPassword" placeholder="Password" minlength="6" required>
+                    <button type="submit" class="btn-secondary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.add('active');
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            } else {
+                document.getElementById('registerForm').classList.add('active');
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const role = document.getElementById('loginRole').value;
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, role })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert('✅ Login successful!');
+                    window.location.href = data.role === 'admin' ? 'admin.html' : 'student.html';
+                } else {
+                    alert('❌ ' + data.error);
+                }
+            } catch (err) {
+                alert('❌ Error: ' + err.message);
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert('✅ Registration successful! Please login.');
+                    showTab('login');
+                } else {
+                    alert('❌ ' + data.error);
+                }
+            } catch (err) {
+                alert('❌ Error: ' + err.message);
+            }
+        }
+    </script>
+</body>
+</html>

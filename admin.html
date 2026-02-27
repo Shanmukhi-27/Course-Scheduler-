@@ -9,37 +9,101 @@
 <body>
     <nav>
         <a href="index.html">← Back to Home</a>
+        <button onclick="logout()" class="btn-danger" style="float: right;">Logout</button>
     </nav>
     
     <div class="dashboard">
         <h2>👨💼 Admin Dashboard</h2>
         
+        <!-- Analytics Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3 id="totalCoursesCount">0</h3>
+                <p>Total Courses</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="totalEnrollments">0</h3>
+                <p>Total Enrollments</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="avgEnrollment">0%</h3>
+                <p>Avg Enrollment Rate</p>
+            </div>
+        </div>
+
+        <!-- Add Course Section -->
         <div class="section">
-            <h3>Add New Course</h3>
+            <h3>➕ Add New Course</h3>
             <div class="form-group">
                 <input type="text" id="courseName" placeholder="Course Name (e.g., Data Structures)">
                 <input type="text" id="courseCode" placeholder="Course Code (e.g., CS101)">
-                <input type="text" id="courseTime" placeholder="Time (e.g., Mon 10:00-12:00)">
+                <select id="courseDay">
+                    <option value="">Select Day</option>
+                    <option value="Mon">Monday</option>
+                    <option value="Tue">Tuesday</option>
+                    <option value="Wed">Wednesday</option>
+                    <option value="Thu">Thursday</option>
+                    <option value="Fri">Friday</option>
+                </select>
+                <select id="courseStartTime">
+                    <option value="">Start Time</option>
+                    <option value="08:00">08:00 AM</option>
+                    <option value="09:00">09:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                </select>
+                <select id="courseEndTime">
+                    <option value="">End Time</option>
+                    <option value="09:00">09:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                    <option value="17:00">05:00 PM</option>
+                </select>
                 <input type="text" id="instructor" placeholder="Instructor Name">
                 <input type="number" id="capacity" placeholder="Max Capacity" min="1">
                 <button onclick="addCourse()" class="btn-primary">Add Course</button>
             </div>
         </div>
 
+        <!-- Course Listings -->
         <div class="section">
-            <h3>Course Listings</h3>
-            <div class="stats">
-                <span>Total Courses: <strong id="totalCourses">0</strong></span>
+            <h3>📚 Course Listings</h3>
+            <div class="filter-bar">
+                <input type="text" id="searchAdmin" placeholder="🔍 Search courses..." onkeyup="filterAdminCourses()">
+                <select id="filterStatus" onchange="filterAdminCourses()">
+                    <option value="">All Courses</option>
+                    <option value="full">Full Courses</option>
+                    <option value="available">Available Courses</option>
+                    <option value="low">Low Enrollment</option>
+                </select>
             </div>
             <ul id="courseList" class="course-list"></ul>
         </div>
 
+        <!-- Registration Overview -->
         <div class="section">
-            <h3>Registration Overview</h3>
+            <h3>📊 Enrollment Analytics</h3>
+            <div id="enrollmentChart" class="chart-container"></div>
             <ul id="registrationList" class="registration-list"></ul>
+        </div>
+
+        <!-- Conflict Detection -->
+        <div class="section">
+            <h3>⚠️ Schedule Conflicts</h3>
+            <ul id="conflictList" class="conflict-list"></ul>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="admin-script.js"></script>
 </body>
 </html>
